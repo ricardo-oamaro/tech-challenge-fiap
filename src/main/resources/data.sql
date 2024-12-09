@@ -1,4 +1,3 @@
-drop table endereco;
 CREATE TABLE endereco (
     id INT PRIMARY KEY AUTO_INCREMENT,
     rua VARCHAR(255),
@@ -14,7 +13,6 @@ VALUES
   ('Rua Principal', 'São Paulo', 'SP', '01234-567', '123', 'Apartamento 101'),
   ('Avenida Central', 'Rio de Janeiro', 'RJ', '23456-789', '456', 'Bloco B'),
   ('Rua da Paz', 'Belo Horizonte', 'MG', '34567-890', '789', 'Casa');
-drop table pessoa;
 CREATE TABLE pessoa (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255),
@@ -30,7 +28,6 @@ VALUES
   ('João Silva', '2023-11-22', 'joao@email.com', 1, 1),
   ('Maria Souza', '2023-12-01', 'maria@email.com', 2, 2),
   ('Pedro Santos', '2023-11-15', 'pedro@email.com', 1, 3);
-drop table usuario;
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuario VARCHAR(255),
