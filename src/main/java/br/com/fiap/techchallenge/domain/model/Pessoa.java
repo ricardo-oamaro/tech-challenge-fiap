@@ -13,6 +13,6 @@ public class Pessoa {
     private LocalDateTime dataUltimaAlteracao;
     private String email;
     private Integer tipo;
-    private Endereco endereco;
+//    private Endereco endereco;
 
 }
