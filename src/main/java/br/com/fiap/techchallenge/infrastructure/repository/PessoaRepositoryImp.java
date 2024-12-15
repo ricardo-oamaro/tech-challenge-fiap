@@ -46,7 +46,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
                 .param("data_ultima_alteracao", pessoa.getDataUltimaAlteracao())
                 .param("email", pessoa.getEmail())
                 .param("tipo", pessoa.getTipo())
-                .param("endereco_id", pessoa.getEndereco())
+                .param("endereco_id", pessoa.getEndereco().getId())
                 .update();
     }
 
@@ -54,7 +54,7 @@ public class PessoaRepositoryImp implements PessoaRepository {
     public Integer update(Pessoa pessoa, Long id) {
         return this.jdbcClient
                 .sql("UPDATE pessoa SET nome = ?, data_ultima_alteracao = ?, email = ?, tipo = ?, endereco_id = ? WHERE id = ?")
-                .params(pessoa.getNome(), pessoa.getDataUltimaAlteracao(), pessoa.getEmail(), pessoa.getTipo(), pessoa.getEndereco(), id)
+                .params(pessoa.getNome(), pessoa.getDataUltimaAlteracao(), pessoa.getEmail(), pessoa.getTipo(), pessoa.getEndereco().getId(), id)
                 .update();
     }
 

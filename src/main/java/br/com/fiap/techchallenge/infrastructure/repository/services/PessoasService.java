@@ -15,7 +15,7 @@ public class PessoasService {
        Pessoa pessoa1 = new Pessoa();
        pessoa1.setNome("Alfredo");
        List listaPessoa = new ArrayList<>();
-       listaPessoa.add(listaPessoa);
+       listaPessoa.add(pessoa1);
        return listaPessoa;  
     }
 
