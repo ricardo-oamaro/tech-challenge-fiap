@@ -1,9 +1,8 @@
-package br.com.fiap.techchallenge.infrastructure.repository.services;
+package br.com.fiap.techchallenge.infrastructure.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.techchallenge.domain.model.Pessoa;

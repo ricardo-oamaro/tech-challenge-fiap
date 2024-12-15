@@ -2,8 +2,7 @@ package br.com.fiap.techchallenge.api.controller;
 
 import java.util.List;
 import br.com.fiap.techchallenge.domain.model.Pessoa;
-import br.com.fiap.techchallenge.infrastructure.repository.services.PessoasService;
-import lombok.AllArgsConstructor;
+import br.com.fiap.techchallenge.infrastructure.services.PessoasService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
