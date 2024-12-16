@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: test
       MYSQL_DATABASE: db_name
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   app:
     build: .
