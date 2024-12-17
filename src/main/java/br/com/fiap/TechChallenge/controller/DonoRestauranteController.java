@@ -82,13 +82,9 @@ public class DonoRestauranteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDonoRestaurante(@PathVariable Long id) {
-        boolean isDeleted = donoRestauranteService.deleteDonoRestaurante(id);
-        if (isDeleted) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Long> deleteDonoRestaurante(@PathVariable Long id) {
+        Long deletedId = donoRestauranteService.deleteDonoRestaurante(id);
+        return ResponseEntity.ok(deletedId);
     }
 
 }

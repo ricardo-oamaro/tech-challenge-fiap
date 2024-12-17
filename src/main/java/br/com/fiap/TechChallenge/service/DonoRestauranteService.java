@@ -1,5 +1,6 @@
 package br.com.fiap.TechChallenge.service;
 
+import br.com.fiap.TechChallenge.exception.ResourceNotFoundException;
 import br.com.fiap.TechChallenge.model.DonoRestaurante;
 import br.com.fiap.TechChallenge.repository.DonoRestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class DonoRestauranteService {
             existingDonoRestaurante.setDataUltimaAlteracao(new Date());
             return donoRestauranteRepository.save(existingDonoRestaurante);
         } else {
-            return null;
+            throw new ResourceNotFoundException("Dono do Restaurante com id " + id + " não foi localizado");
         }
     }
 
@@ -77,12 +78,12 @@ public class DonoRestauranteService {
         return donoRestauranteRepository.findAllByOrderByDataUltimaAlteracaoAsc();
     }
 
-    public boolean deleteDonoRestaurante(Long id) {
+    public Long deleteDonoRestaurante(Long id) {
         if (donoRestauranteRepository.existsById(id)) {
             donoRestauranteRepository.deleteById(id);
-            return true;
+            return id;
         } else {
-            return false;
+            throw new ResourceNotFoundException("Dono do Restaurante com id " + id + " não foi localizado");
         }
     }
 
