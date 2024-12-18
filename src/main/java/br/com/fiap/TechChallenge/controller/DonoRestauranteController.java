@@ -23,11 +23,6 @@ public class DonoRestauranteController {
         return donoRestauranteService.save(donoRestaurante);
     }
 
-    @GetMapping("/ids")
-    public List<DonoRestaurante> getAllByOrderByIdAsc() {
-        return donoRestauranteService.findAllByOrderByIdAsc();
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<DonoRestauranteDTO> updateDonoRestaurante(@PathVariable Long id, @RequestBody DonoRestaurante updatedDonoRestaurante) {
         DonoRestaurante updatedEntity = donoRestauranteService.updateDonoRestaurante(id, updatedDonoRestaurante);
@@ -44,6 +39,25 @@ public class DonoRestauranteController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DonoRestauranteDTO> getById(@PathVariable Long id) {
+        DonoRestaurante donoRestaurante = donoRestauranteService.findById(id);
+        DonoRestauranteDTO dto = new DonoRestauranteDTO(
+                donoRestaurante.getId(),
+                donoRestaurante.getNome(),
+                donoRestaurante.getEmail(),
+                donoRestaurante.getLogin(),
+                donoRestaurante.getEndereco(),
+                donoRestaurante.getDataUltimaAlteracao()
+        );
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/ids")
+    public List<DonoRestaurante> getAllByOrderByIdAsc() {
+        return donoRestauranteService.findAllByOrderByIdAsc();
     }
 
     @GetMapping("/nome/{nome}")

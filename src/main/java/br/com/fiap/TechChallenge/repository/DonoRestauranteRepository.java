@@ -24,5 +24,4 @@ public interface DonoRestauranteRepository extends JpaRepository<DonoRestaurante
     List<DonoRestaurante> findAllByOrderByEnderecoAsc();
 
     List<DonoRestaurante> findAllByOrderByDataUltimaAlteracaoAsc();
-
 }

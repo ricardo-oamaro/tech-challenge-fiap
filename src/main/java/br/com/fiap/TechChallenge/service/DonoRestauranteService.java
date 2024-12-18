@@ -20,6 +20,11 @@ public class DonoRestauranteService {
         return donoRestauranteRepository.save(donoRestaurante);
     }
 
+    public DonoRestaurante findById(Long id) {
+        return donoRestauranteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Dono do Restaurante com id " + id + " não foi localizado"));
+    }
+
     public List<DonoRestaurante> findAllByOrderByIdAsc() {
         return donoRestauranteRepository.findAllByOrderByIdAsc();
     }
