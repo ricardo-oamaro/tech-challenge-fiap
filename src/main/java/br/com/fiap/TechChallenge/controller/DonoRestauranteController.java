@@ -56,8 +56,22 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/ids")
-    public List<DonoRestaurante> getAllByOrderByIdAsc() {
-        return donoRestauranteService.findAllByOrderByIdAsc();
+    public ResponseEntity<?> getAllByOrderByIdAsc() {
+        List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByIdAsc();
+        if (donosRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes cadastrados");
+        }
+        List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
+                .map(dono -> new DonoRestauranteDTO(
+                        dono.getId(),
+                        dono.getNome(),
+                        dono.getEmail(),
+                        dono.getLogin(),
+                        dono.getEndereco(),
+                        dono.getDataUltimaAlteracao()
+                ))
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/nome/{nome}")
