@@ -30,7 +30,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"123\",\r\n    \"email\": \"sdasd@asdad\",\r\n    \"senha\": \"123\",\r\n    \"login\": \"123s\",\r\n    \"endereco\": \"asdasdasd\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Alfredo\",\r\n    \"email\": \"sdasd@asdad\",\r\n    \"senha\": \"123\",\r\n    \"login\": \"123s\",\r\n    \"endereco\": \"asdasdasd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,7 +195,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/api/cliente-restaurante/9",
+							"raw": "http://localhost:9090/api/cliente-restaurante/24",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -204,7 +204,7 @@
 							"path": [
 								"api",
 								"cliente-restaurante",
-								"9"
+								"24"
 							],
 							"query": [
 								{
@@ -322,7 +322,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/api/cliente-restaurante/email/3joao.silva@email.com",
+							"raw": "http://localhost:9090/api/cliente-restaurante/email/3carlos.oliveira@email.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -332,7 +332,7 @@
 								"api",
 								"cliente-restaurante",
 								"email",
-								"3joao.silva@email.com"
+								"3carlos.oliveira@email.com"
 							]
 						}
 					},
@@ -539,7 +539,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/api/dono-restaurante/nomes",
+							"raw": "http://localhost:9090/api/cliente-restaurante/nome/João da Silva",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -547,8 +547,9 @@
 							"port": "9090",
 							"path": [
 								"api",
-								"dono-restaurante",
-								"nomes"
+								"cliente-restaurante",
+								"nome",
+								"João da Silva"
 							]
 						}
 					},
@@ -586,6 +587,107 @@
 								"nomes"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/usuario/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/usuario/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"usuario",
+								"login"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/usuario/login\" -d \"login=seu_login\" -d \"senha=sua_senha\""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/usuario/alterar-senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "login",
+									"value": "jsilva",
+									"type": "text"
+								},
+								{
+									"key": "senhaAntiga",
+									"value": "senha1234",
+									"type": "text"
+								},
+								{
+									"key": "novaSenha",
+									"value": "senha1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9090/api/usuario/alterar-senha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"usuario",
+								"alterar-senha"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/usuario/alterar-senha\" -d \"login=seu_login\" -d \"senhaAntiga=sua_senha_antiga\" -d \"novaSenha=sua_nova_senha\""
 					},
 					"response": []
 				}
