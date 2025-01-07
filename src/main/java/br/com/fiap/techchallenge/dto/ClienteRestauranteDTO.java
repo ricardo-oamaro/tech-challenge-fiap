@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.dto;
+package br.com.fiap.techchallenge.dto;
 
 import lombok.*;
 

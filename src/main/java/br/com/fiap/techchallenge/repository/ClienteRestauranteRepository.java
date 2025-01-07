@@ -1,7 +1,7 @@
-package br.com.fiap.TechChallenge.repository;
+package br.com.fiap.techchallenge.repository;
 
-import br.com.fiap.TechChallenge.model.ClienteRestaurante;
-import br.com.fiap.TechChallenge.model.DonoRestaurante;
+import br.com.fiap.techchallenge.model.ClienteRestaurante;
+import br.com.fiap.techchallenge.model.DonoRestaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

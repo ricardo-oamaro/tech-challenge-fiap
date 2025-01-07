@@ -1,8 +1,8 @@
-package br.com.fiap.TechChallenge.controller;
+package br.com.fiap.techchallenge.controller;
 
-import br.com.fiap.TechChallenge.dto.ClienteRestauranteDTO;
-import br.com.fiap.TechChallenge.model.ClienteRestaurante;
-import br.com.fiap.TechChallenge.service.ClienteRestauranteService;
+import br.com.fiap.techchallenge.dto.ClienteRestauranteDTO;
+import br.com.fiap.techchallenge.model.ClienteRestaurante;
+import br.com.fiap.techchallenge.service.ClienteRestauranteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
