@@ -1,8 +1,8 @@
 package br.com.fiap.techchallenge.service;
 
-import br.com.fiap.TechChallenge.exception.ResourceNotFoundException;
-import br.com.fiap.TechChallenge.model.DonoRestaurante;
-import br.com.fiap.TechChallenge.repository.DonoRestauranteRepository;
+import br.com.fiap.techchallenge.exception.ResourceNotFoundException;
+import br.com.fiap.techchallenge.model.DonoRestaurante;
+import br.com.fiap.techchallenge.repository.DonoRestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
