@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "pessoas")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 public class Pessoa {
