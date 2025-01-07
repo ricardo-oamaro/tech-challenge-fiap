@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.exception;
+package br.com.fiap.techchallenge.exception;
 
 public class ResourceNotFoundException extends RuntimeException  {
 

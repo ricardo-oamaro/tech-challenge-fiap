@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.model;
+package br.com.fiap.techchallenge.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

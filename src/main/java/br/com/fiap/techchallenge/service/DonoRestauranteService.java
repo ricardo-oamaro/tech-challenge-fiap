@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.service;
+package br.com.fiap.techchallenge.service;
 
 import br.com.fiap.TechChallenge.exception.ResourceNotFoundException;
 import br.com.fiap.TechChallenge.model.DonoRestaurante;

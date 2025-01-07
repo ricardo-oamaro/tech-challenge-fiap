@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.controller;
+package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.TechChallenge.service.UsuarioService;
 import org.springframework.web.bind.annotation.RequestMapping;

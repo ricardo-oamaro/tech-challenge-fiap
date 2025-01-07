@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.service;
+package br.com.fiap.techchallenge.service;
 
 import br.com.fiap.TechChallenge.model.Pessoa;
 import br.com.fiap.TechChallenge.repository.PessoaRepository;

@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.controller;
+package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.TechChallenge.dto.ClienteRestauranteDTO;
 import br.com.fiap.TechChallenge.model.ClienteRestaurante;
