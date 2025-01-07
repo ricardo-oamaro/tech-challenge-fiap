@@ -26,7 +26,7 @@
     ```
    OU
    ```sh
-    docker-compose up --d 
+    docker-compose up -d 
     ```
 
 ## Execução
@@ -51,11 +51,10 @@
 ## Endpoints
 
 - `GET http://localhost:9090/api/dono-restaurante/ids`: Lista todos os donos de restaurante ordenados pelo ID de forma crescente.
-- `GET http://localhost:9090/api/dono-restaurante/nome/{nome}`: Busca o dono do restaurante pelo nome desejado.
+- `GET http://localhost:9090/api/dono-restaurante/nome`: Busca o dono do restaurante pelo nome desejado.
 - `GET http://localhost:9090/api/dono-restaurante/nomes`: Lista todos os donos de restaurante ordenados pelo nome de forma crescente.
-- `GET http://localhost:9090/api/dono-restaurante/email/{email}`: Busca o dono do restaurante pelo e-mail desejado.
+- `GET http://localhost:9090/api/dono-restaurante/email`: Busca o dono do restaurante pelo e-mail desejado.
 - `GET http://localhost:9090/api/dono-restaurante/emails`: Lista todos os donos de restaurante ordenados por e-mail de forma crescente.
-- `GET http://localhost:9090/api/dono-restaurante/endereco/{endereco}`: Busca o dono do restaurante pelo endereço desejado.
 - `GET http://localhost:9090/api/dono-restaurante/enderecos`: Lista todos os donos de restaurante ordenados pelo endereço de forma crescente.
 - `GET http://localhost:9090/api/dono-restaurante/data-ultima-alteracao`: Lista todos os donos de restaurante ordenados pela data de alteração forma crescente.
 - `POST http://localhost:9090/api/dono-restaurante`: Cria um novo dono de restaurante.

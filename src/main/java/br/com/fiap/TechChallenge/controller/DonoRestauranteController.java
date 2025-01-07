@@ -74,39 +74,116 @@ public class DonoRestauranteController {
         return ResponseEntity.ok(dtoList);
     }
 
-    @GetMapping("/nome/{nome}")
-    public DonoRestaurante getByNome(@PathVariable String nome) {
-        return donoRestauranteService.findByNome(nome);
+    @GetMapping("/nome")
+    public ResponseEntity<DonoRestauranteDTO> getByNome(@RequestParam String nome) {
+        DonoRestaurante donoRestaurante = donoRestauranteService.findByNome(nome);
+        if (donoRestaurante != null) {
+            DonoRestauranteDTO dto = new DonoRestauranteDTO(
+                    donoRestaurante.getId(),
+                    donoRestaurante.getNome(),
+                    donoRestaurante.getEmail(),
+                    donoRestaurante.getLogin(),
+                    donoRestaurante.getEndereco(),
+                    donoRestaurante.getDataUltimaAlteracao()
+            );
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/nomes")
-    public List<DonoRestaurante> getAllByOrderByNomeAsc() {
-        return donoRestauranteService.findAllByOrderByNomeAsc();
-    }
-
-    @GetMapping("/email/{email}")
-    public DonoRestaurante getByEmail(@PathVariable String email) {
-        return donoRestauranteService.findByEmail(email);
+    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByNomeAsc() {
+        List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByNomeAsc();
+        if (donosRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
+                .map(dono -> new DonoRestauranteDTO(
+                        dono.getId(),
+                        dono.getNome(),
+                        dono.getEmail(),
+                        dono.getLogin(),
+                        dono.getEndereco(),
+                        dono.getDataUltimaAlteracao()
+                ))
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/emails")
-    public List<DonoRestaurante> getAllByOrderByEmailAsc() {
-        return donoRestauranteService.findAllByOrderByEmailAsc();
+    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByEmailAsc() {
+        List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByEmailAsc();
+        if (donosRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
+                .map(dono -> new DonoRestauranteDTO(
+                        dono.getId(),
+                        dono.getNome(),
+                        dono.getEmail(),
+                        dono.getLogin(),
+                        dono.getEndereco(),
+                        dono.getDataUltimaAlteracao()
+                ))
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
-    @GetMapping("/endereco/{endereco}")
-    public DonoRestaurante getByEndereco(@PathVariable String endereco) {
-        return donoRestauranteService.findByEndereco(endereco);
+    @GetMapping("/email")
+    public ResponseEntity<DonoRestauranteDTO> getByEmail(@RequestParam String email) {
+        DonoRestaurante donoRestaurante = donoRestauranteService.findByEmail(email);
+        if (donoRestaurante != null) {
+            DonoRestauranteDTO dto = new DonoRestauranteDTO(
+                    donoRestaurante.getId(),
+                    donoRestaurante.getNome(),
+                    donoRestaurante.getEmail(),
+                    donoRestaurante.getLogin(),
+                    donoRestaurante.getEndereco(),
+                    donoRestaurante.getDataUltimaAlteracao()
+            );
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/enderecos")
-    public List<DonoRestaurante> getAllByOrderByEnderecoAsc() {
-        return donoRestauranteService.findAllByOrderByEnderecoAsc();
+    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByEnderecoAsc() {
+        List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByEnderecoAsc();
+        if (donosRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
+                .map(dono -> new DonoRestauranteDTO(
+                        dono.getId(),
+                        dono.getNome(),
+                        dono.getEmail(),
+                        dono.getLogin(),
+                        dono.getEndereco(),
+                        dono.getDataUltimaAlteracao()
+                ))
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/data-ultima-alteracao")
-    public List<DonoRestaurante> getAllByOrderByDataUltimaAlteracaoAsc() {
-        return donoRestauranteService.findAllByOrderByDataUltimaAlteracaoAsc();
+    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByDataUltimaAlteracaoAsc() {
+        List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByDataUltimaAlteracaoAsc();
+        if (donosRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
+                .map(dono -> new DonoRestauranteDTO(
+                        dono.getId(),
+                        dono.getNome(),
+                        dono.getEmail(),
+                        dono.getLogin(),
+                        dono.getEndereco(),
+                        dono.getDataUltimaAlteracao()
+                ))
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @DeleteMapping("/{id}")
