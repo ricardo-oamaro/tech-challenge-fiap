@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.config;
+package br.com.fiap.techchallenge.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.OpenAPI;

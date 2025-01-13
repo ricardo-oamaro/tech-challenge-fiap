@@ -12,7 +12,7 @@
 1. Clone o repositório:
     ```sh
     git clone https://github.com/ricardo-oamaro/tech-challenge-fiap.git
-    cd TechChallenge
+    cd techchallenge
     ```
 
 2. Construa o projeto com Maven:

@@ -1,4 +1,4 @@
-package br.com.fiap.TechChallenge.exception;
+package br.com.fiap.techchallenge.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
