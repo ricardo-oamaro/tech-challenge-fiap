@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DonoRestauranteService {
+public class DonoRestauranteService implements DonoRestauranteServiceInterface{
 
     @Autowired
     private DonoRestauranteRepository donoRestauranteRepository;

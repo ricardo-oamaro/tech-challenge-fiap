@@ -2,7 +2,7 @@ package br.com.fiap.TechChallenge.controller;
 
 import br.com.fiap.TechChallenge.dto.DonoRestauranteDTO;
 import br.com.fiap.TechChallenge.model.DonoRestaurante;
-import br.com.fiap.TechChallenge.service.DonoRestauranteService;
+import br.com.fiap.TechChallenge.service.DonoRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/dono-restaurante")
 public class DonoRestauranteController {
 
     @Autowired
-    private DonoRestauranteService donoRestauranteService;
+    private DonoRestauranteServiceInterface donoRestauranteService;
 
     @PostMapping
     public DonoRestaurante create(@Valid @RequestBody DonoRestaurante donoRestaurante) {
@@ -59,7 +61,7 @@ public class DonoRestauranteController {
     public ResponseEntity<?> getAllByOrderByIdAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByIdAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes cadastrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes não cadastrados");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(dono -> new DonoRestauranteDTO(
@@ -93,10 +95,10 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/nomes")
-    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByNomeAsc() {
+    public ResponseEntity<?> getAllByOrderByNomeAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByNomeAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes não cadastrados");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(dono -> new DonoRestauranteDTO(
