@@ -1,7 +1,6 @@
 package br.com.fiap.techchallenge.service;
 
 import br.com.fiap.techchallenge.model.DonoRestaurante;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

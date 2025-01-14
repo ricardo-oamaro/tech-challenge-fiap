@@ -59,7 +59,7 @@ public class ClienteRestauranteController {
     public ResponseEntity<?> getAllByOrderByIdAsc() {
         List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService.findAllByOrderByIdAsc();
         if (clientesRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clientes de restaurantes cadastrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clientes de restaurantes não cadastrados");
         }
         List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
                 .map(cliente -> new ClienteRestauranteDTO(

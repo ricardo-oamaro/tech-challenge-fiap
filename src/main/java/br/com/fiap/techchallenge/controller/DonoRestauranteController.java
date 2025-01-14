@@ -46,7 +46,7 @@ public class DonoRestauranteController {
     public ResponseEntity<?> getAllByOrderByIdAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByIdAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes cadastrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes não cadastrados");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(DonoRestauranteMapper::toDTO)
