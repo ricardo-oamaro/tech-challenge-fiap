@@ -6,6 +6,7 @@ import br.com.fiap.techchallenge.model.DonoRestaurante;
 import br.com.fiap.techchallenge.service.DonoRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/dono-restaurante")
 public class DonoRestauranteController {
 
+    @Qualifier("donoRestauranteServiceImpl")
     @Autowired
     private DonoRestauranteServiceInterface donoRestauranteService;
 
