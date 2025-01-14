@@ -1,8 +1,9 @@
 package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.DonoRestauranteDTO;
+import br.com.fiap.techchallenge.mapper.DonoRestauranteMapper;
 import br.com.fiap.techchallenge.model.DonoRestaurante;
-import br.com.fiap.techchallenge.service.DonoRestauranteService;
+import br.com.fiap.techchallenge.service.DonoRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import java.util.List;
 public class DonoRestauranteController {
 
     @Autowired
-    private DonoRestauranteService donoRestauranteService;
+    private DonoRestauranteServiceInterface donoRestauranteService;
 
     @PostMapping
     public DonoRestaurante create(@Valid @RequestBody DonoRestaurante donoRestaurante) {
@@ -27,14 +28,7 @@ public class DonoRestauranteController {
     public ResponseEntity<DonoRestauranteDTO> updateDonoRestaurante(@PathVariable Long id, @RequestBody DonoRestaurante updatedDonoRestaurante) {
         DonoRestaurante updatedEntity = donoRestauranteService.updateDonoRestaurante(id, updatedDonoRestaurante);
         if (updatedEntity != null) {
-            DonoRestauranteDTO dto = new DonoRestauranteDTO(
-                    updatedEntity.getId(),
-                    updatedEntity.getNome(),
-                    updatedEntity.getEmail(),
-                    updatedEntity.getLogin(),
-                    updatedEntity.getEndereco(),
-                    updatedEntity.getDataUltimaAlteracao()
-            );
+            DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(updatedEntity);
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -44,14 +38,7 @@ public class DonoRestauranteController {
     @GetMapping("/{id}")
     public ResponseEntity<DonoRestauranteDTO> getById(@PathVariable Long id) {
         DonoRestaurante donoRestaurante = donoRestauranteService.findById(id);
-        DonoRestauranteDTO dto = new DonoRestauranteDTO(
-                donoRestaurante.getId(),
-                donoRestaurante.getNome(),
-                donoRestaurante.getEmail(),
-                donoRestaurante.getLogin(),
-                donoRestaurante.getEndereco(),
-                donoRestaurante.getDataUltimaAlteracao()
-        );
+        DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(donoRestaurante);
         return ResponseEntity.ok(dto);
     }
 
@@ -62,14 +49,7 @@ public class DonoRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes cadastrados");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
-                .map(dono -> new DonoRestauranteDTO(
-                        dono.getId(),
-                        dono.getNome(),
-                        dono.getEmail(),
-                        dono.getLogin(),
-                        dono.getEndereco(),
-                        dono.getDataUltimaAlteracao()
-                ))
+                .map(DonoRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
@@ -78,14 +58,7 @@ public class DonoRestauranteController {
     public ResponseEntity<DonoRestauranteDTO> getByNome(@RequestParam String nome) {
         DonoRestaurante donoRestaurante = donoRestauranteService.findByNome(nome);
         if (donoRestaurante != null) {
-            DonoRestauranteDTO dto = new DonoRestauranteDTO(
-                    donoRestaurante.getId(),
-                    donoRestaurante.getNome(),
-                    donoRestaurante.getEmail(),
-                    donoRestaurante.getLogin(),
-                    donoRestaurante.getEndereco(),
-                    donoRestaurante.getDataUltimaAlteracao()
-            );
+            DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(donoRestaurante);
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -99,14 +72,7 @@ public class DonoRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
-                .map(dono -> new DonoRestauranteDTO(
-                        dono.getId(),
-                        dono.getNome(),
-                        dono.getEmail(),
-                        dono.getLogin(),
-                        dono.getEndereco(),
-                        dono.getDataUltimaAlteracao()
-                ))
+                .map(DonoRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
@@ -118,14 +84,7 @@ public class DonoRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
-                .map(dono -> new DonoRestauranteDTO(
-                        dono.getId(),
-                        dono.getNome(),
-                        dono.getEmail(),
-                        dono.getLogin(),
-                        dono.getEndereco(),
-                        dono.getDataUltimaAlteracao()
-                ))
+                .map(DonoRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
@@ -134,14 +93,7 @@ public class DonoRestauranteController {
     public ResponseEntity<DonoRestauranteDTO> getByEmail(@RequestParam String email) {
         DonoRestaurante donoRestaurante = donoRestauranteService.findByEmail(email);
         if (donoRestaurante != null) {
-            DonoRestauranteDTO dto = new DonoRestauranteDTO(
-                    donoRestaurante.getId(),
-                    donoRestaurante.getNome(),
-                    donoRestaurante.getEmail(),
-                    donoRestaurante.getLogin(),
-                    donoRestaurante.getEndereco(),
-                    donoRestaurante.getDataUltimaAlteracao()
-            );
+            DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(donoRestaurante);
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -155,14 +107,7 @@ public class DonoRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
-                .map(dono -> new DonoRestauranteDTO(
-                        dono.getId(),
-                        dono.getNome(),
-                        dono.getEmail(),
-                        dono.getLogin(),
-                        dono.getEndereco(),
-                        dono.getDataUltimaAlteracao()
-                ))
+                .map(DonoRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
@@ -174,14 +119,7 @@ public class DonoRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
-                .map(dono -> new DonoRestauranteDTO(
-                        dono.getId(),
-                        dono.getNome(),
-                        dono.getEmail(),
-                        dono.getLogin(),
-                        dono.getEndereco(),
-                        dono.getDataUltimaAlteracao()
-                ))
+                .map(DonoRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
@@ -191,5 +129,4 @@ public class DonoRestauranteController {
         Long deletedId = donoRestauranteService.deleteDonoRestaurante(id);
         return ResponseEntity.ok(deletedId);
     }
-
 }
