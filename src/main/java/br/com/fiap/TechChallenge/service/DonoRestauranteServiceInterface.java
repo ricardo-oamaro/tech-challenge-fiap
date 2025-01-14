@@ -1,6 +1,7 @@
 package br.com.fiap.TechChallenge.service;
 
 import br.com.fiap.TechChallenge.model.DonoRestaurante;
+
 import java.util.List;
 
 public interface DonoRestauranteServiceInterface {
