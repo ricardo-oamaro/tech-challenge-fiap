@@ -11,24 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteRestauranteService {
+public class ClienteRestauranteServiceImpl implements ClienteRestauranteServiceInterface {
 
     @Autowired
     private ClienteRestauranteRepository clienteRestauranteRepository;
 
+    @Override
     public ClienteRestaurante save(ClienteRestaurante clienteRestaurante) {
         return clienteRestauranteRepository.save(clienteRestaurante);
     }
 
-    public ClienteRestaurante findById(Long id) {
-        return clienteRestauranteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente do Restaurante com id " + id + " não foi localizado"));
-    }
-
-    public List<ClienteRestaurante> findAllByOrderByIdAsc() {
-        return clienteRestauranteRepository.findAllByOrderByIdAsc();
-    }
-
+    @Override
     public ClienteRestaurante updateClienteRestaurante(Long id, ClienteRestaurante updatedClienteRestaurante) {
         Optional<ClienteRestaurante> optionalClienteRestaurante = clienteRestauranteRepository.findById(id);
         if (optionalClienteRestaurante.isPresent()) {
@@ -55,34 +48,49 @@ public class ClienteRestauranteService {
         }
     }
 
+    @Override
+    public ClienteRestaurante findById(Long id) {
+        return clienteRestauranteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Cliente do Restaurante com id " + id + " não foi localizado"));
+    }
+
+    @Override
+    public List<ClienteRestaurante> findAllByOrderByIdAsc() {
+        return clienteRestauranteRepository.findAllByOrderByIdAsc();
+    }
+
+    @Override
     public ClienteRestaurante findByNome(String nome) {
         return clienteRestauranteRepository.findByNome(nome);
     }
 
+    @Override
     public List<ClienteRestaurante> findAllByOrderByNomeAsc() {
         return clienteRestauranteRepository.findAllByOrderByNomeAsc();
     }
 
-    public ClienteRestaurante findByEmail(String email) {
-        return clienteRestauranteRepository.findByEmail(email);
-    }
-
+    @Override
     public List<ClienteRestaurante> findAllByOrderByEmailAsc() {
         return clienteRestauranteRepository.findAllByOrderByEmailAsc();
     }
 
-    public ClienteRestaurante findByEndereco(String endereco) {
-        return clienteRestauranteRepository.findByEndereco(endereco);
+    @Override
+    public ClienteRestaurante findByEmail(String email) {
+        return clienteRestauranteRepository.findByEmail(email);
     }
 
+    @Override
     public List<ClienteRestaurante> findAllByOrderByEnderecoAsc() {
         return clienteRestauranteRepository.findAllByOrderByEnderecoAsc();
     }
 
+    @Override
     public List<ClienteRestaurante> findAllByOrderByDataUltimaAlteracaoAsc() {
         return clienteRestauranteRepository.findAllByOrderByDataUltimaAlteracaoAsc();
     }
 
+    @Override
     public Long deleteClienteRestaurante(Long id) {
         if (clienteRestauranteRepository.existsById(id)) {
             clienteRestauranteRepository.deleteById(id);
@@ -91,5 +99,4 @@ public class ClienteRestauranteService {
             throw new ResourceNotFoundException("Cliente do Restaurante com id " + id + " não foi localizado");
         }
     }
-
 }
