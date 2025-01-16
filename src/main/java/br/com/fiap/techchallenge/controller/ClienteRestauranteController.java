@@ -3,7 +3,7 @@ package br.com.fiap.techchallenge.controller;
 import br.com.fiap.techchallenge.dto.ClienteRestauranteDTO;
 import br.com.fiap.techchallenge.mapper.ClienteRestauranteMapper;
 import br.com.fiap.techchallenge.model.ClienteRestaurante;
-import br.com.fiap.techchallenge.service.ClienteRestauranteService;
+import br.com.fiap.techchallenge.service.ClienteRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ public class ClienteRestauranteController {
 
     @Qualifier("clienteRestauranteServiceImpl")
     @Autowired
-    private ClienteRestauranteService clienteRestauranteService;
+    private ClienteRestauranteServiceInterface clienteRestauranteService;
 
     @PostMapping
     public ClienteRestaurante create(@Valid @RequestBody ClienteRestaurante clienteRestaurante) {
