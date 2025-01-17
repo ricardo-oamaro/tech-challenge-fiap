@@ -1,14 +1,17 @@
 package br.com.fiap.techchallenge.service;
 
+import br.com.fiap.techchallenge.dto.UsuarioResumoDTO;
 import br.com.fiap.techchallenge.exception.ResourceNotFoundException;
 import br.com.fiap.techchallenge.model.Usuario;
 import br.com.fiap.techchallenge.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioServiceInterface {
@@ -49,47 +52,6 @@ public class UsuarioServiceImpl implements UsuarioServiceInterface {
     }
 
     @Override
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário com id " + id + " não foi localizado"));
-    }
-
-    @Override
-    public List<Usuario> findAllByOrderByIdAsc() {
-        return usuarioRepository.findAllByOrderByIdAsc();
-    }
-
-    @Override
-    public Usuario findByNome(String nome) {
-        return usuarioRepository.findByNome(nome);
-    }
-
-    @Override
-    public List<Usuario> findAllByOrderByNomeAsc() {
-        return usuarioRepository.findAllByOrderByNomeAsc();
-    }
-
-    @Override
-    public List<Usuario> findAllByOrderByEmailAsc() {
-        return usuarioRepository.findAllByOrderByEmailAsc();
-    }
-
-    @Override
-    public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
-
-    @Override
-    public List<Usuario> findAllByOrderByEnderecoAsc() {
-        return usuarioRepository.findAllByOrderByEnderecoAsc();
-    }
-
-    @Override
-    public List<Usuario> findAllByOrderByDataUltimaAlteracaoAsc() {
-        return usuarioRepository.findAllByOrderByDataUltimaAlteracaoAsc();
-    }
-
-    @Override
     public Long deleteUsuario(Long id) {
         if (usuarioRepository.existsById(id)) {
             usuarioRepository.deleteById(id);
@@ -97,5 +59,30 @@ public class UsuarioServiceImpl implements UsuarioServiceInterface {
         } else {
             throw new ResourceNotFoundException("Usuário com id " + id + " não foi localizado");
         }
+    }
+
+    @Override
+    public boolean validarLogin(String login, String senha) {
+        Usuario usuario = usuarioRepository.findByLogin(login);
+        return usuario != null && usuario.getSenha().equals(senha);
+    }
+
+    @Override
+    public boolean alterarSenha(String login, String senhaAntiga, String novaSenha) {
+        Usuario usuario = usuarioRepository.findByLogin(login);
+        if (usuario != null && usuario.getSenha().equals(senhaAntiga)) {
+            usuario.setSenha(novaSenha);
+            usuarioRepository.save(usuario);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<UsuarioResumoDTO> listarUsuarios() {
+        return usuarioRepository.findAll().stream()
+                .map(usuario -> new UsuarioResumoDTO(usuario.getNome(), usuario.getEmail(), usuario.getLogin()))
+                .sorted(Comparator.comparing(UsuarioResumoDTO::getNome))
+                .collect(Collectors.toList());
     }
 }
