@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "07594ffe-4804-4379-85a9-8e4627489d18",
+		"name": "TechChallenge_DonosRestaurante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4824164"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "alterarSenha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Antonio Carlos\",\r\n  \"email\": \"antonio.carlos@teste.com.br\",\r\n  \"login\": \"antonio.carlos\",\r\n  \"senha\": \"123456\",\r\n  \"endereco\": \"Rua de Teste, 5000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/usuario/alterar-senha?login=antonio.carlos&senhaAntiga=123&novaSenha=123456",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"alterar-senha"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "antonio.carlos"
+								},
+								{
+									"key": "senhaAntiga",
+									"value": "123"
+								},
+								{
+									"key": "novaSenha",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Antonio Carlos\",\r\n  \"email\": \"antonio.carlos@teste.com.br\",\r\n  \"login\": \"antonio.carlos\",\r\n  \"senha\": \"123456\",\r\n  \"endereco\": \"Rua de Teste, 5000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/api/usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "validarLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Antonio Carlos\",\r\n  \"email\": \"antonio.carlos@teste.com.br\",\r\n  \"login\": \"antonio.carlos\",\r\n  \"senha\": \"123456\",\r\n  \"endereco\": \"Rua de Teste, 5000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/usuario/validar-login?login=paulo.roberto&senha=123456",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"validar-login"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "paulo.roberto"
+								},
+								{
+									"key": "senha",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletarUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Key",
+								"value": "Content-Type",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Value",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "{{baseURL}}/api/usuario/16"
+					},
+					"response": []
+				},
+				{
+					"name": "consultarUsuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseURL}}/api/usuario/listar"
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Key",
+								"value": "Content-Type",
+								"type": "text"
+							},
+							{
+								"key": "Value",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Pedro Galvão\",\r\n  \"email\": \"pedro.galvao@teste.com.br\",\r\n  \"login\": \"arnaldo.antunes\",\r\n  \"senha\": \"123456\",\r\n  \"endereco\": \"Rua de Teste, 5000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/api/usuario"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

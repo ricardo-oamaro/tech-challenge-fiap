@@ -4,12 +4,16 @@ import br.com.fiap.techchallenge.dto.UsuarioResumoDTO;
 import br.com.fiap.techchallenge.model.DonoRestaurante;
 import br.com.fiap.techchallenge.model.Usuario;
 import br.com.fiap.techchallenge.service.UsuarioServiceInterface;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -19,8 +23,17 @@ public class UsuarioController {
     private UsuarioServiceInterface usuarioServiceInterface;
 
     @PostMapping
-    public Usuario create(@Valid @RequestBody Usuario usuario) {
-        return usuarioServiceInterface.save(usuario);
+    public ResponseEntity<?> create(@Valid @RequestBody Usuario usuario) {
+        try {
+            Usuario savedUsuario = usuarioServiceInterface.save(usuario);
+            return ResponseEntity.ok(savedUsuario);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            String errorMessage = violations.stream()
+                    .map(ConstraintViolation::getMessage)
+                    .collect(Collectors.joining(", "));
+            return ResponseEntity.badRequest().body("Erro de validação: " + errorMessage);
+        }
     }
 
     @PostMapping("/validar-login")
