@@ -1,6 +1,9 @@
 package br.com.fiap.techchallenge.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -8,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClienteRestauranteDTO {
+public class UsuarioDTO {
     private Long id;
     private String nome;
     private String email;

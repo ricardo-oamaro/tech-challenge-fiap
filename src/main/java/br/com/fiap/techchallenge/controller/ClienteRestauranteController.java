@@ -1,10 +1,12 @@
 package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.ClienteRestauranteDTO;
+import br.com.fiap.techchallenge.mapper.ClienteRestauranteMapper;
 import br.com.fiap.techchallenge.model.ClienteRestaurante;
-import br.com.fiap.techchallenge.service.ClienteRestauranteService;
+import br.com.fiap.techchallenge.service.ClienteRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +17,9 @@ import java.util.List;
 @RequestMapping("/api/cliente-restaurante")
 public class ClienteRestauranteController {
 
+    @Qualifier("clienteRestauranteServiceImpl")
     @Autowired
-    private ClienteRestauranteService clienteRestauranteService;
+    private ClienteRestauranteServiceInterface clienteRestauranteService;
 
     @PostMapping
     public ClienteRestaurante create(@Valid @RequestBody ClienteRestaurante clienteRestaurante) {
@@ -27,14 +30,7 @@ public class ClienteRestauranteController {
     public ResponseEntity<ClienteRestauranteDTO> updateClienteRestaurante(@PathVariable Long id, @RequestBody ClienteRestaurante updatedClienteRestaurante) {
         ClienteRestaurante updatedEntity = clienteRestauranteService.updateClienteRestaurante(id, updatedClienteRestaurante);
         if (updatedEntity != null) {
-            ClienteRestauranteDTO dto = new ClienteRestauranteDTO(
-                    updatedEntity.getId(),
-                    updatedEntity.getNome(),
-                    updatedEntity.getEmail(),
-                    updatedEntity.getLogin(),
-                    updatedEntity.getEndereco(),
-                    updatedEntity.getDataUltimaAlteracao()
-            );
+            ClienteRestauranteDTO dto = ClienteRestauranteMapper.toDTO(updatedEntity);
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -44,14 +40,7 @@ public class ClienteRestauranteController {
     @GetMapping("/{id}")
     public ResponseEntity<ClienteRestauranteDTO> getById(@PathVariable Long id) {
         ClienteRestaurante clienteRestaurante = clienteRestauranteService.findById(id);
-        ClienteRestauranteDTO dto = new ClienteRestauranteDTO(
-                clienteRestaurante.getId(),
-                clienteRestaurante.getNome(),
-                clienteRestaurante.getEmail(),
-                clienteRestaurante.getLogin(),
-                clienteRestaurante.getEndereco(),
-                clienteRestaurante.getDataUltimaAlteracao()
-        );
+        ClienteRestauranteDTO dto = ClienteRestauranteMapper.toDTO(clienteRestaurante);
         return ResponseEntity.ok(dto);
     }
 
@@ -62,53 +51,80 @@ public class ClienteRestauranteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clientes de restaurantes não cadastrados");
         }
         List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
-                .map(cliente -> new ClienteRestauranteDTO(
-                        cliente.getId(),
-                        cliente.getNome(),
-                        cliente.getEmail(),
-                        cliente.getLogin(),
-                        cliente.getEndereco(),
-                        cliente.getDataUltimaAlteracao()
-                ))
+                .map(ClienteRestauranteMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(dtoList);
     }
 
-    @GetMapping("/nome/{nome}")
-    public ClienteRestaurante getByNome(@PathVariable String nome) {
-        return clienteRestauranteService.findByNome(nome);
+    @GetMapping("/nome")
+    public ResponseEntity<ClienteRestauranteDTO> getByNome(@RequestParam String nome) {
+        ClienteRestaurante clienteRestaurante = clienteRestauranteService.findByNome(nome);
+        if (clienteRestaurante != null) {
+            ClienteRestauranteDTO dto = ClienteRestauranteMapper.toDTO(clienteRestaurante);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/nomes")
-    public List<ClienteRestaurante> getAllByOrderByNomeAsc() {
-        return clienteRestauranteService.findAllByOrderByNomeAsc();
-    }
-
-    @GetMapping("/email/{email}")
-    public ClienteRestaurante getByEmail(@PathVariable String email) {
-        ClienteRestaurante byEmail = clienteRestauranteService.findByEmail(email);
-        return byEmail;
+    public ResponseEntity<List<ClienteRestauranteDTO>> getAllByOrderByNomeAsc() {
+        List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService.findAllByOrderByNomeAsc();
+        if (clientesRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
+                .map(ClienteRestauranteMapper::toDTO)
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/emails")
-    public List<ClienteRestaurante> getAllByOrderByEmailAsc() {
-        return clienteRestauranteService.findAllByOrderByEmailAsc();
+    public ResponseEntity<List<ClienteRestauranteDTO>> getAllByOrderByEmailAsc() {
+        List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService.findAllByOrderByEmailAsc();
+        if (clientesRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
+                .map(ClienteRestauranteMapper::toDTO)
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
-    @GetMapping("/endereco/{endereco}")
-    public ClienteRestaurante getByEndereco(@PathVariable String endereco) {
-        ClienteRestaurante byEndereco = clienteRestauranteService.findByEndereco(endereco);
-        return byEndereco;
+    @GetMapping("/email")
+    public ResponseEntity<ClienteRestauranteDTO> getByEmail(@RequestParam String email) {
+        ClienteRestaurante clienteRestaurante = clienteRestauranteService.findByEmail(email);
+        if (clienteRestaurante != null) {
+            ClienteRestauranteDTO dto = ClienteRestauranteMapper.toDTO(clienteRestaurante);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/enderecos")
-    public List<ClienteRestaurante> getAllByOrderByEnderecoAsc() {
-        return clienteRestauranteService.findAllByOrderByEnderecoAsc();
+    public ResponseEntity<List<ClienteRestauranteDTO>> getAllByOrderByEnderecoAsc() {
+        List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService.findAllByOrderByEnderecoAsc();
+        if (clientesRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
+                .map(ClienteRestauranteMapper::toDTO)
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/data-ultima-alteracao")
-    public List<ClienteRestaurante> getAllByOrderByDataUltimaAlteracaoAsc() {
-        return clienteRestauranteService.findAllByOrderByDataUltimaAlteracaoAsc();
+    public ResponseEntity<List<ClienteRestauranteDTO>> getAllByOrderByDataUltimaAlteracaoAsc() {
+        List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService
+                .findAllByOrderByDataUltimaAlteracaoAsc();
+        if (clientesRestaurantes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
+                .map(ClienteRestauranteMapper::toDTO)
+                .toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @DeleteMapping("/{id}")
@@ -116,5 +132,4 @@ public class ClienteRestauranteController {
         Long deletedId = clienteRestauranteService.deleteClienteRestaurante(id);
         return ResponseEntity.ok(deletedId);
     }
-
 }

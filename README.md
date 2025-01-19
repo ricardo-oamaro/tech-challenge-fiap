@@ -66,7 +66,6 @@
 - `GET http://localhost:9090/api/cliente-restaurante/nomes`: Lista todos os clientes do restaurante ordenados pelo nome de forma crescente.
 - `GET http://localhost:9090/api/cliente-restaurante/email/{email}`: Busca o cliente do restaurante pelo e-mail desejado.
 - `GET http://localhost:9090/api/cliente-restaurante/emails`: Lista todos os clientes do restaurante ordenados por e-mail de forma crescente.
-- `GET http://localhost:9090/api/cliente-restaurante/endereco/{endereco}`: Busca o cliente do restaurante pelo endereço desejado.
 - `GET http://localhost:9090/api/cliente-restaurante/enderecos`: Lista todos os clientes do restaurante ordenados pelo endereço de forma crescente.
 - `GET http://localhost:9090/api/cliente-restaurante/data-ultima-alteracao`: Lista todos os clientes do restaurante ordenados pela data de alteração forma crescente.
 - `POST http://localhost:9090/api/cliente-restaurante`: Cria um novo cliente do restaurante.

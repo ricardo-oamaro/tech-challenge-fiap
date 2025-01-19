@@ -7,6 +7,5 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ClienteRestaurante extends Pessoa {
-
+public class Usuario extends Pessoa {
 }

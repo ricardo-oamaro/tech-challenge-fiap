@@ -48,7 +48,7 @@ public class DonoRestauranteController {
     public ResponseEntity<?> getAllByOrderByIdAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByIdAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Donos de restaurantes não cadastrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dono de restaurante não cadastrado");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(DonoRestauranteMapper::toDTO)
@@ -57,13 +57,13 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/nome")
-    public ResponseEntity<DonoRestauranteDTO> getByNome(@RequestParam String nome) {
+    public ResponseEntity<?> getByNome(@RequestParam String nome) {
         DonoRestaurante donoRestaurante = donoRestauranteService.findByNome(nome);
         if (donoRestaurante != null) {
             DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(donoRestaurante);
             return ResponseEntity.ok(dto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dono de restaurante não cadastrado");
         }
     }
 
@@ -92,13 +92,13 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/email")
-    public ResponseEntity<DonoRestauranteDTO> getByEmail(@RequestParam String email) {
+    public ResponseEntity<?> getByEmail(@RequestParam String email) {
         DonoRestaurante donoRestaurante = donoRestauranteService.findByEmail(email);
         if (donoRestaurante != null) {
             DonoRestauranteDTO dto = DonoRestauranteMapper.toDTO(donoRestaurante);
             return ResponseEntity.ok(dto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dono de restaurante não cadastrado");
         }
     }
 
@@ -115,10 +115,10 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/data-ultima-alteracao")
-    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByDataUltimaAlteracaoAsc() {
+    public ResponseEntity<?> getAllByOrderByDataUltimaAlteracaoAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByDataUltimaAlteracaoAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dono de restaurante não cadastrado");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(DonoRestauranteMapper::toDTO)
