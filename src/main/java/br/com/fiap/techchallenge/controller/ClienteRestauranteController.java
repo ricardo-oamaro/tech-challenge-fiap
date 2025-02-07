@@ -1,8 +1,11 @@
 package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.ClienteRestauranteDTO;
+import br.com.fiap.techchallenge.dto.DonoRestauranteDTO;
 import br.com.fiap.techchallenge.mapper.ClienteRestauranteMapper;
+import br.com.fiap.techchallenge.mapper.DonoRestauranteMapper;
 import br.com.fiap.techchallenge.model.ClienteRestaurante;
+import br.com.fiap.techchallenge.model.DonoRestaurante;
 import br.com.fiap.techchallenge.service.ClienteRestauranteServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,10 +71,10 @@ public class ClienteRestauranteController {
     }
 
     @GetMapping("/nomes")
-    public ResponseEntity<List<ClienteRestauranteDTO>> getAllByOrderByNomeAsc() {
+    public ResponseEntity<?> getAllByOrderByNomeAsc() {
         List<ClienteRestaurante> clientesRestaurantes = clienteRestauranteService.findAllByOrderByNomeAsc();
         if (clientesRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe nenhum cliente de restaurante cadastrado");
         }
         List<ClienteRestauranteDTO> dtoList = clientesRestaurantes.stream()
                 .map(ClienteRestauranteMapper::toDTO)
