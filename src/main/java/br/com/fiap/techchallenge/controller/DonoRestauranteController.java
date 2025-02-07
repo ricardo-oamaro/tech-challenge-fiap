@@ -68,10 +68,10 @@ public class DonoRestauranteController {
     }
 
     @GetMapping("/nomes")
-    public ResponseEntity<List<DonoRestauranteDTO>> getAllByOrderByNomeAsc() {
+    public ResponseEntity<?> getAllByOrderByNomeAsc() {
         List<DonoRestaurante> donosRestaurantes = donoRestauranteService.findAllByOrderByNomeAsc();
         if (donosRestaurantes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe nenhum dono de restaurante cadastrado");
         }
         List<DonoRestauranteDTO> dtoList = donosRestaurantes.stream()
                 .map(DonoRestauranteMapper::toDTO)
