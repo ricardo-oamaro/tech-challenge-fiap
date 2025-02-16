@@ -1,11 +1,13 @@
 package br.com.fiap.techchallenge.service;
 
+import br.com.fiap.techchallenge.exception.ResourceNotFoundException;
 import br.com.fiap.techchallenge.model.Restaurante;
 import br.com.fiap.techchallenge.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,12 +17,30 @@ public class RestauranteServiceImpl implements  RestauranteServiceInterface {
 
     @Override
     public Restaurante save(Restaurante restaurante) {
-        return null;
+        return restauranteRepository.save(restaurante);
     }
 
     @Override
     public Restaurante updateRestaurante(Long id, Restaurante updatedRestaurante) {
-        return null;
+        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(id);
+        if (optionalRestaurante.isPresent()) {
+            Restaurante existingRestaurante = optionalRestaurante.get();
+            if (updatedRestaurante.getNome() != null) {
+                existingRestaurante.setNome(updatedRestaurante.getNome());
+            }
+            if (updatedRestaurante.getEndereco() != null) {
+                existingRestaurante.setEndereco(updatedRestaurante.getEndereco());
+            }
+            if (updatedRestaurante.getTipoCozinha() != null) {
+                existingRestaurante.setTipoCozinha(updatedRestaurante.getTipoCozinha());
+            }
+            if (updatedRestaurante.getDonoRestaurante() != null) {
+                existingRestaurante.setDonoRestaurante(updatedRestaurante.getDonoRestaurante());
+            }
+            return restauranteRepository.save(existingRestaurante);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -70,6 +90,16 @@ public class RestauranteServiceImpl implements  RestauranteServiceInterface {
 
     @Override
     public Long deleteRestaurante(Long id) {
-        return null;
+        if (restauranteRepository.existsById(id)) {
+            restauranteRepository.deleteById(id);
+            return id;
+        } else {
+            throw new ResourceNotFoundException("Restaurante com id " + id + " não foi localizado");
+        }
+    }
+
+    @Override
+    public List<Restaurante> findAll() {
+        return restauranteRepository.findAll();
     }
 }

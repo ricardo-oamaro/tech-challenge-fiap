@@ -30,4 +30,6 @@ public interface RestauranteServiceInterface {
     List<Restaurante> findAllByOrderByDataUltimaAlteracaoAsc();
 
     Long deleteRestaurante(Long id);
+
+    List<Restaurante> findAll();
 }
